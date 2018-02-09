@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" >
+        <div formGroupName="userData">
+
+          <div class="form-group">
+            <label for="projectname">Project Name</label>
+            <input type="text"
+                   id="projectname"
+                   formControlName="projectname"
+                   class="form-control">
+            <span
+                    *ngIf="!signupForm.get('userData.projectname').valid && signupForm.get('userData.projectname').touched"
+                    class="help-block">
+
+            <span *ngIf="signupForm.get('userData.projectname').errors['nameIsForbidden']">This name is invalid!</span>
+            <span *ngIf="signupForm.get('userData.projectname').errors['required']">This name is required!</span>
+            </span>
+
+
+          </div>
+
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text"
+                   id="email"
+                   formControlName="email"
+                   class="form-control">
+            <span
+                    *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched"
+                    class="help-block">Please enter valid email!</span>
+          </div>
+
+        </div>
+
+
+
+
+          <div class="form-group" >
+            <label for="status">Project Status</label>
+            <select
+                    id="status"
+                    formControlName="gender"
+                    class="form-control">
+              <option *ngFor="let gender of genders" [value]="gender" >{{ gender }}</option>
+
+
+
+              <!--<option value="Critical">Critical</option>-->
+              <!--<option value="Finished">Finished</option>-->
+            </select>
+
+          </div>
+          <span
+                  *ngIf="!signupForm.valid && signupForm.touched"
+                  class="help-block">Please enter Data!</span>
+
+
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+
+
+    </div>
+  </div>
+</div>
+<!--
+          Create a Form with the following Controls and Validators
+          1) Project Name (should not be empty)
+          2) Mail (should not be a empty and a valid email)
+          3) Project Status Dropdown, with three values: 'Stable', 'Critical', 'Finished'
+          4) Submit Button
+
+          Add your own Validator which doesn't allow "Test" as a Project Name
+
+          Also implement that Validator as an async Validator (replace the other one)
+
+          Upon submitting the form, simply print the value to the console
+      -->
